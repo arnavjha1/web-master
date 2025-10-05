@@ -9,8 +9,29 @@
   </head>
   <body>
     <h1>Web Master</h1>
+    <input id="search-bar" placeholder="Search">
+    <button onclick="search()">⌕</button><br><br>
+    <h3>Search Results</h3>
+    <ul id="search-results"></ul>
     <script>
-      
+      let database = [
+        "siddles",
+        "kid",
+        "spinach",
+        "siddles grandma"
+      ]
+
+      function search(){
+        let searchQuery = document.getElementById("search-bar").value;
+        let searchResults = document.getElementById("search-results");
+
+        //Look though all of the database to see what search results match
+        for(let i=0; i<database.length; i++){
+          if(database[i].split(searchQuery)[0] != database[i]){
+            searchResults.innerHTML += "<li>"+database[i]+"</li>"
+          }
+        }
+      }
     </script>
   </body>
 </html>
