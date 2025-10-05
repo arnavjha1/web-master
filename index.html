@@ -13,7 +13,42 @@
     <button onclick="search()">⌕</button><br><br>
     <h3>Search Results</h3>
     <ul id="search-results"></ul>
-    <script>
+
+    <!--Scripts below-->
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ";
+
+      // Access your API key (see "Set up your API key" above)
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      // ...
+
+      const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+
+      // ...
+      async function run(fr) {
+        // For text-only input, use the gemini-pro model
+        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+
+        const prompt = fr
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        const text = response.text();
+        alert(text);
+      }
+
+      run("What is a tree made out of?")
       let database = [
         "siddles",
         "kid",

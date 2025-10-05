@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gemini Chat Example</title>
+  </head>
+  <body>
+    <h2>Gemini Demo</h2>
+    <textarea id="prompt" placeholder="Ask something..."></textarea>
+    <button onclick="askGemini()">Send</button>
+    <pre id="response"></pre>
+
+      <script type="module">
+        //AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+        // Replace this with your API key from Google AI Studio
+        const genAI = new GoogleGenerativeAI("AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ");
+
+        window.askGemini = async function() {
+            const prompt = document.getElementById("prompt").value;
+            const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+            const result = await model.generateContent(prompt);
+            const response = await result.response.text();
+
+            document.getElementById("response").innerText = response;
+        }
+   </script>
+  </body>
+</html>
