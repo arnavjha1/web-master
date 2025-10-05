@@ -10,51 +10,151 @@
   <body>
     <h1>Web Master</h1>
     <input id="search-bar" placeholder="Search">
-    <button onclick="search()">⌕</button><br><br>
+    <button onclick="askGemini()">⌕</button><br><br>
     <h3>Search Results</h3>
     <ul id="search-results"></ul>
 
     <!--Scripts below-->
-    <script type="importmap">
-      {
-        "imports": {
-          "@google/generative-ai": "https://esm.run/@google/generative-ai"
-        }
-      }
-    </script>
     <script type="module">
-      import { GoogleGenerativeAI } from "@google/generative-ai";
+      //AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ
+      import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
 
-      // Fetch your API_KEY
-      const API_KEY = "AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ";
+      // Replace this with your API key from Google AI Studio
+      const genAI = new GoogleGenerativeAI("AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ");
 
-      // Access your API key (see "Set up your API key" above)
-      const genAI = new GoogleGenerativeAI(API_KEY);
-
-      // ...
-
-      const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
-      // ...
-      async function run(fr) {
-        // For text-only input, use the gemini-pro model
-        const model = genAI.getGenerativeModel({ model: "gemini-pro"});
-
-        const prompt = fr
+      window.askGemini = async function() {
+        const prompt = "Take the following Javascript list and return a string of integers ordered from greatest to least relevancy to the search query. The search query is '" + document.getElementById("search-bar").value + "The database is " + database.toString() + ". Only return the string of integers with no other text. It should just be a line of "+database.length+" numbers without any line breaks, spaces, or characters. The integers should be between 0 and 9, where 0 is the most relevant and 9 is the least relevant.";
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
-        alert(text);
+        const response = await result.response.text();
+
+        alert(response);
+        processSearchResults(response);
       }
 
-      run("What is a tree made out of?")
       let database = [
-        "siddles",
-        "kid",
+        // Vegetables (Low-calorie, low-processed)
         "spinach",
-        "siddles grandma"
-      ]
+        "kale",
+        "lettuce",
+        "broccoli",
+        "carrot",
+        "cucumber",
+        "tomato",
+        "zucchini",
+        "bell pepper",
+        "cauliflower",
+        "celery",
+        "onion",
+        "garlic",
+        "green beans",
+        "eggplant",
+
+        // Fruits (Low-processed, moderate calories)
+        "apple",
+        "banana",
+        "orange",
+        "grapes",
+        "blueberries",
+        "strawberries",
+        "pineapple",
+        "watermelon",
+        "peach",
+        "pear",
+        "mango",
+        "avocado",
+
+        // Whole grains (moderate processing, complex carbs)
+        "brown rice",
+        "quinoa",
+        "whole wheat bread",
+        "oatmeal",
+        "barley",
+        "bulgur",
+        "millet",
+
+        // Meat & protein (varying processing levels)
+        "chicken breast",
+        "ground beef",
+        "salmon",
+        "tuna",
+        "turkey",
+        "pork chop",
+        "bacon",
+        "hot dog",
+        "pepperoni",
+        "beef jerky",
+        "sausages",
+        "spam",
+        "ham",
+        "rotisserie chicken",
+
+        // Dairy & Eggs
+        "milk",
+        "yogurt",
+        "Greek yogurt",
+        "cheddar cheese",
+        "cottage cheese",
+        "cream cheese",
+        "butter",
+        "ice cream",
+        "eggs",
+        "whipped cream",
+
+        // Legumes & Nuts
+        "black beans",
+        "chickpeas",
+        "lentils",
+        "edamame",
+        "tofu",
+        "peanut butter",
+        "almonds",
+        "cashews",
+        "walnuts",
+
+        // Baked goods & snacks (moderate to high processing)
+        "white bread",
+        "croissant",
+        "bagel",
+        "donut",
+        "muffin",
+        "granola bar",
+        "potato chips",
+        "popcorn",
+        "pretzels",
+        "crackers",
+
+        // Sweets & Desserts (highly processed, high-calorie)
+        "chocolate bar",
+        "gummy bears",
+        "cheesecake",
+        "cupcake",
+        "cookies",
+        "brownies",
+        "ice cream sandwich",
+        "pudding cup",
+        "fruit snacks",
+
+        // Fast food & Frozen (ultra-processed)
+        "pizza",
+        "chicken nuggets",
+        "frozen lasagna",
+        "instant ramen",
+        "TV dinner",
+        "microwave popcorn",
+        "mac and cheese box",
+        "fish sticks",
+        "corn dog",
+
+        // Condiments & Sauces
+        "ketchup",
+        "mayonnaise",
+        "ranch dressing",
+        "soy sauce",
+        "barbecue sauce",
+        "sriracha"
+      ];
 
       function search(){
         let searchQuery = document.getElementById("search-bar").value;
@@ -64,6 +164,21 @@
         for(let i=0; i<database.length; i++){
           if(database[i].split(searchQuery)[0] != database[i]){
             searchResults.innerHTML += "<li>"+database[i]+"</li>"
+          }
+        }
+      }
+
+      function processSearchResults(response){
+        let searchResults = document.getElementById("search-results");
+        searchResults.innerHTML = "";
+
+        let indices = response.split("");
+        for(let j=0; j<9; j++){
+          for(let i=0; i<indices.length; i++){
+            let index = parseInt(indices[i]);
+            if(index == j){
+              searchResults.innerHTML += "<li>"+database[i]+"</li>"
+            }
           }
         }
       }
