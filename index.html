@@ -8,15 +8,19 @@
     </style>
   </head>
   <body>
-    <h1>Web Master</h1>
+    <h1>Search Bar</h1>
     <input id="search-bar" placeholder="Search">
-    <button onclick="askGemini()">⌕</button><br><br>
+    <button id="submit" style="visibility:visible" onclick="slowAIsearch()">⌕</button><br><br>
 
-    <label for="file">Downloading progress:</label>
-    <progress id="file" value="32" max="100">32%</progress><br><br>
-    
-    <h3>Search Results</h3>
-    <ul id="search-results"></ul>
+    <div id="loading" style="visibility:hidden">
+      <label for="file" id="search-label">Searching Database...</label><br>
+      <progress id="file" value="0" max="100"></progress><br>
+    </div>
+
+    <div id="results" style="visibility:hidden">
+      <h3>Search Results</h3>
+      <ul id="search-results"></ul>
+    </div>
 
     <!--Scripts below-->
     <script type="module">
@@ -26,15 +30,16 @@
       // Replace this with your API key from Google AI Studio
       const genAI = new GoogleGenerativeAI("AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ");
 
-      window.askGemini = async function() {
+      window.slowAIsearch = async function() {
+        startLoadAnimation();
+
         const prompt = "Take the following Javascript list and return a string of integers ordered from greatest to least relevancy to the search query. The search query is '" + document.getElementById("search-bar").value + "The database is " + database.toString() + ". Only return the string of integers with no other text. It should just be a line of "+database.length+" numbers without any line breaks, spaces, or characters. The integers should be between 0 and 9, where 0 is the most relevant and 9 is the least relevant.";
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const result = await model.generateContent(prompt);
         const response = await result.response.text();
 
-        alert(response);
-        processSearchResults(response);
+        fullLoadAnimation(response);
       }
 
       let database = [
@@ -160,7 +165,52 @@
         "sriracha"
       ];
 
-      function search(){
+      let optimizedSearch = false;
+
+      function startLoadAnimation(){
+        document.getElementById("loading").style.visibility = "visible";
+        document.getElementById("submit").style.visibility = "hidden";
+
+        let progressBar = document.getElementById("file");
+        let width = 0;
+        let id = setInterval(frame, database.length*8+250);
+        function frame() {
+          if(!optimizedSearch){
+            if (width >= 100) {
+              clearInterval(id);
+            } else {
+              width++;
+              progressBar.value = width;
+            }
+          }
+          else {
+            clearInterval(id);
+          }
+        }
+      }
+
+      function fullLoadAnimation(response){
+        optimizedSearch = true;                            //Searching database...
+        document.getElementById("search-label").innerText = "Optimizing searching ...";
+        
+        let progressBar = document.getElementById("file");
+        let width = parseInt(progressBar.value);
+        let id = setInterval(frame, 50);
+        function frame() {
+          if (width >= 100) {
+            clearInterval(id);
+            document.getElementById("loading").style.visibility = "hidden";
+            document.getElementById("results").style.visibility = "visible";
+            alert(response);
+            processSearchResults(response);
+          } else {
+            width++;
+            progressBar.value = width;
+          }
+        }
+      }
+
+      function fastNonAISearch(){
         let searchQuery = document.getElementById("search-bar").value;
         let searchResults = document.getElementById("search-results");
 
@@ -173,6 +223,9 @@
       }
 
       function processSearchResults(response){
+        document.getElementById("loading").style.visibility = "hidden";
+        document.getElementById("results").style.visibility = "visible";
+
         let searchResults = document.getElementById("search-results");
         searchResults.innerHTML = "";
 
