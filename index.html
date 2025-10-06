@@ -11,6 +11,10 @@
     <h1>Web Master</h1>
     <input id="search-bar" placeholder="Search">
     <button onclick="askGemini()">⌕</button><br><br>
+
+    <label for="file">Downloading progress:</label>
+    <progress id="file" value="32" max="100">32%</progress><br><br>
+    
     <h3>Search Results</h3>
     <ul id="search-results"></ul>
 
@@ -182,6 +186,8 @@
           }
         }
       }
+
+
     </script>
   </body>
 </html>
