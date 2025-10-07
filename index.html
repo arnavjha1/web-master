@@ -13,13 +13,14 @@
     <button id="submit" style="visibility:visible" onclick="slowAIsearch()">⌕</button><br><br>
 
     <div id="loading" style="visibility:hidden">
-      <label for="file" id="search-label">Searching Database...</label>
+      <label for="file" id="search-label">Searching Database...</label><br>
       <progress id="file" value="0" max="100"></progress><br>
     </div>
 
     <div id="results" style="visibility:hidden">
       <h3>Search Results</h3>
       <ul id="search-results"></ul>
+      <p><button onclick="back()">&lt;</button>ㅤPage <c id="current-page">1</c> of <c id="total-pages">1</c>ㅤ<button onclick="forward()">&gt;</button></p>
     </div>
 
     <!--Scripts below-->
@@ -166,6 +167,11 @@
       ];
 
       let optimizedSearch = false;
+      let searchRes = [];
+      const howRelevantResults = 3;
+      const resultsPerPage = 10;
+      let currentPage = 1;
+      let totalPages = 1;
 
       function startLoadAnimation(){
         document.getElementById("loading").style.visibility = "visible";
@@ -195,7 +201,7 @@
         
         let progressBar = document.getElementById("file");
         let width = parseInt(progressBar.value);
-        let id = setInterval(frame, 500);
+        let id = setInterval(frame, 250);
         function frame() {
           if (width >= 100) {
             clearInterval(id);
@@ -204,7 +210,7 @@
             alert(response);
             processSearchResults(response);
           } else {
-            width += Math.random()*20;
+            width += Math.random()*4+3;
             progressBar.value = width;
           }
         }
@@ -230,16 +236,47 @@
         searchResults.innerHTML = "";
 
         let indices = response.split("");
-        for(let j=0; j<9; j++){
+        for(let j=0; j<howRelevantResults; j++){
           for(let i=0; i<indices.length; i++){
             let index = parseInt(indices[i]);
             if(index == j){
-              searchResults.innerHTML += "<li>"+database[i]+"</li>"
+              searchRes.push(database[i]);
             }
           }
         }
+
+        updateResults();
       }
 
+      window.back = function() {
+        if(currentPage > 1){
+          currentPage--;
+          updateResults();
+        }
+      }
+      
+      window.forward = function() {
+        if(currentPage < totalPages){
+          currentPage++;
+          updateResults();
+        }
+      }
+
+      function updateResults(){
+        let searchResults = document.getElementById("search-results");
+        searchResults.innerHTML = "";
+
+        totalPages = Math.ceil(searchRes.length / resultsPerPage);
+        document.getElementById("current-page").innerText = currentPage;
+        document.getElementById("total-pages").innerText = totalPages;
+
+        let startIndex = (currentPage-1) * resultsPerPage;
+        let endIndex = Math.min(startIndex + resultsPerPage, searchRes.length);
+
+        for(let i=startIndex; i<endIndex; i++){
+          searchResults.innerHTML += "<li>"+searchRes[i]+"</li>"
+        }
+      }
 
     </script>
   </body>
