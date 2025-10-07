@@ -185,7 +185,21 @@
             if (width >= 100) {
               clearInterval(id);
             } else {
-              width++;
+              if(width > 75){
+                document.getElementById("search-label").innerText = "Deep Analysis (this may take a while) ...";
+                width += 0.2;
+              }
+              else if(width > 50){
+                document.getElementById("search-label").innerText = "Analyzing database ...";
+                width += 0.5;
+              }
+              else if(width > 25){
+                document.getElementById("search-label").innerText = "Comparing results ...";
+                width += 1;
+              }
+              else {
+                width += 3;
+              }
               progressBar.value = width;
             }
           }
@@ -197,7 +211,7 @@
 
       function fullLoadAnimation(response){
         optimizedSearch = true;                            //Searching database...
-        document.getElementById("search-label").innerText = "Optimizing searching ...";
+        document.getElementById("search-label").innerText = "Optimizing Algorithm ...";
         
         let progressBar = document.getElementById("file");
         let width = parseInt(progressBar.value);
