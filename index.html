@@ -13,7 +13,7 @@
     <button id="submit" style="visibility:visible" onclick="slowAIsearch()">⌕</button><br><br>
 
     <div id="loading" style="visibility:hidden">
-      <label for="file" id="search-label">Searching Database...</label><br>
+      <label for="file" id="search-label">Searching Database...</label>
       <progress id="file" value="0" max="100"></progress><br>
     </div>
 
@@ -195,7 +195,7 @@
         
         let progressBar = document.getElementById("file");
         let width = parseInt(progressBar.value);
-        let id = setInterval(frame, 50);
+        let id = setInterval(frame, 500);
         function frame() {
           if (width >= 100) {
             clearInterval(id);
@@ -204,7 +204,7 @@
             alert(response);
             processSearchResults(response);
           } else {
-            width++;
+            width += Math.random()*20;
             progressBar.value = width;
           }
         }
