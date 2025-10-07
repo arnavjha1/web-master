@@ -168,7 +168,8 @@
 
       let optimizedSearch = false;
       let searchRes = [];
-      const howRelevantResults = 3;
+      const mostResults = 30;
+      const mostRelevance = 5;
       const resultsPerPage = 10;
       let currentPage = 1;
       let totalPages = 1;
@@ -250,12 +251,15 @@
         searchResults.innerHTML = "";
 
         let indices = response.split("");
-        for(let j=0; j<howRelevantResults; j++){
+        for(let j=0; j<mostRelevance; j++){
           for(let i=0; i<indices.length; i++){
             let index = parseInt(indices[i]);
             if(index == j){
               searchRes.push(database[i]);
             }
+          }
+          if(searchRes.length >= mostResults){
+            break;
           }
         }
 
