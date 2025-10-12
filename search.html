@@ -1,0 +1,313 @@
+<html>
+  <head>
+    <title>Web Master</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Search Bar</h1>
+    <input id="search-bar" placeholder="Search">
+    <button id="submit" style="visibility:visible" onclick="slowAIsearch()">⌕</button><br><br>
+
+    <div id="loading" style="visibility:hidden">
+      <label for="file" id="search-label">Searching Database...</label><br>
+      <progress id="file" value="0" max="100"></progress><br>
+    </div>
+
+    <div id="results" style="visibility:hidden">
+      <h3>Search Results</h3>
+      <ul id="search-results"></ul>
+      <p><button onclick="back()">&lt;</button>ㅤPage <c id="current-page">1</c> of <c id="total-pages">1</c>ㅤ<button onclick="forward()">&gt;</button></p>
+    </div>
+
+    <!--Scripts below-->
+    <script type="module">
+      //AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ
+      import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+      // Replace this with your API key from Google AI Studio
+      const genAI = new GoogleGenerativeAI("AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ");
+
+      window.slowAIsearch = async function() {
+        startLoadAnimation();
+
+        const prompt = "Take the following Javascript list and return a string of integers ordered from greatest to least relevancy to the search query. The search query is '" + document.getElementById("search-bar").value + "The database is " + database.toString() + ". Only return the string of integers with no other text. It should just be a line of "+database.length+" numbers without any line breaks, spaces, or characters. The integers should be between 0 and 9, where 0 is the most relevant and 9 is the least relevant.";
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response.text();
+
+        fullLoadAnimation(response);
+      }
+
+      let nuDatabase = [
+        
+      ]
+
+      let database = [
+        // Vegetables (Low-calorie, low-processed)
+        "spinach",
+        "kale",
+        "lettuce",
+        "broccoli",
+        "carrot",
+        "cucumber",
+        "tomato",
+        "zucchini",
+        "bell pepper",
+        "cauliflower",
+        "celery",
+        "onion",
+        "garlic",
+        "green beans",
+        "eggplant",
+
+        // Fruits (Low-processed, moderate calories)
+        "apple",
+        "banana",
+        "orange",
+        "grapes",
+        "blueberries",
+        "strawberries",
+        "pineapple",
+        "watermelon",
+        "peach",
+        "pear",
+        "mango",
+        "avocado",
+
+        // Whole grains (moderate processing, complex carbs)
+        "brown rice",
+        "quinoa",
+        "whole wheat bread",
+        "oatmeal",
+        "barley",
+        "bulgur",
+        "millet",
+
+        // Meat & protein (varying processing levels)
+        "chicken breast",
+        "ground beef",
+        "salmon",
+        "tuna",
+        "turkey",
+        "pork chop",
+        "bacon",
+        "hot dog",
+        "pepperoni",
+        "beef jerky",
+        "sausages",
+        "spam",
+        "ham",
+        "rotisserie chicken",
+
+        // Dairy & Eggs
+        "milk",
+        "yogurt",
+        "Greek yogurt",
+        "cheddar cheese",
+        "cottage cheese",
+        "cream cheese",
+        "butter",
+        "ice cream",
+        "eggs",
+        "whipped cream",
+
+        // Legumes & Nuts
+        "black beans",
+        "chickpeas",
+        "lentils",
+        "edamame",
+        "tofu",
+        "peanut butter",
+        "almonds",
+        "cashews",
+        "walnuts",
+
+        // Baked goods & snacks (moderate to high processing)
+        "white bread",
+        "croissant",
+        "bagel",
+        "donut",
+        "muffin",
+        "granola bar",
+        "potato chips",
+        "popcorn",
+        "pretzels",
+        "crackers",
+
+        // Sweets & Desserts (highly processed, high-calorie)
+        "chocolate bar",
+        "gummy bears",
+        "cheesecake",
+        "cupcake",
+        "cookies",
+        "brownies",
+        "ice cream sandwich",
+        "pudding cup",
+        "fruit snacks",
+
+        // Fast food & Frozen (ultra-processed)
+        "pizza",
+        "chicken nuggets",
+        "frozen lasagna",
+        "instant ramen",
+        "TV dinner",
+        "microwave popcorn",
+        "mac and cheese box",
+        "fish sticks",
+        "corn dog",
+
+        // Condiments & Sauces
+        "ketchup",
+        "mayonnaise",
+        "ranch dressing",
+        "soy sauce",
+        "barbecue sauce",
+        "sriracha"
+      ];
+
+      let optimizedSearch = false;
+      let searchRes = [];
+      const mostResults = 30;
+      const mostRelevance = 5;
+      const resultsPerPage = 10;
+      let currentPage = 1;
+      let totalPages = 1;
+
+      onloadScript();
+      function onloadScript(){
+        let hash = window.location.hash;
+        if(hash.length > 1){
+          document.getElementById("search-bar").value = hash.substring(1);
+          slowAIsearch();
+        }
+      }
+      function startLoadAnimation(){
+        document.getElementById("loading").style.visibility = "visible";
+        document.getElementById("submit").style.visibility = "hidden";
+
+        let progressBar = document.getElementById("file");
+        let width = 0;
+        let id = setInterval(frame, database.length*8+250);
+        function frame() {
+          if(!optimizedSearch){
+            if (width >= 100) {
+              clearInterval(id);
+            } else {
+              if(width > 75){
+                document.getElementById("search-label").innerText = "Deep Analysis (this may take a while) ...";
+                width += 0.2;
+              }
+              else if(width > 50){
+                document.getElementById("search-label").innerText = "Analyzing database ...";
+                width += 0.5;
+              }
+              else if(width > 25){
+                document.getElementById("search-label").innerText = "Comparing results ...";
+                width += 1;
+              }
+              else {
+                width += 3;
+              }
+              progressBar.value = width;
+            }
+          }
+          else {
+            clearInterval(id);
+          }
+        }
+      }
+
+      function fullLoadAnimation(response){
+        optimizedSearch = true;                            //Searching database...
+        document.getElementById("search-label").innerText = "Optimizing Algorithm ...";
+        
+        let progressBar = document.getElementById("file");
+        let width = parseInt(progressBar.value);
+        let id = setInterval(frame, 250);
+        function frame() {
+          if (width >= 100) {
+            clearInterval(id);
+            document.getElementById("loading").style.visibility = "hidden";
+            document.getElementById("results").style.visibility = "visible";
+            alert(response);
+            processSearchResults(response);
+          } else {
+            width += Math.random()*4+3;
+            progressBar.value = width;
+          }
+        }
+      }
+
+      function fastNonAISearch(){
+        let searchQuery = document.getElementById("search-bar").value;
+        let searchResults = document.getElementById("search-results");
+
+        //Look though all of the database to see what search results match
+        for(let i=0; i<database.length; i++){
+          if(database[i].split(searchQuery)[0] != database[i]){
+            searchResults.innerHTML += "<li>"+database[i]+"</li>"
+          }
+        }
+      }
+
+      function processSearchResults(response){
+        document.getElementById("loading").style.visibility = "hidden";
+        document.getElementById("results").style.visibility = "visible";
+
+        let searchResults = document.getElementById("search-results");
+        searchResults.innerHTML = "";
+
+        let indices = response.split("");
+        for(let j=0; j<mostRelevance; j++){
+          for(let i=0; i<indices.length; i++){
+            let index = parseInt(indices[i]);
+            if(index == j){
+              searchRes.push(database[i]);
+            }
+          }
+          if(searchRes.length >= mostResults){
+            break;
+          }
+        }
+
+        updateResults();
+      }
+
+      window.back = function() {
+        if(currentPage > 1){
+          currentPage--;
+          updateResults();
+        }
+      }
+      
+      window.forward = function() {
+        if(currentPage < totalPages){
+          currentPage++;
+          updateResults();
+        }
+      }
+
+      function updateResults(){
+        let searchResults = document.getElementById("search-results");
+        searchResults.innerHTML = "";
+
+        totalPages = Math.ceil(searchRes.length / resultsPerPage);
+        document.getElementById("current-page").innerText = currentPage;
+        document.getElementById("total-pages").innerText = totalPages;
+
+        let startIndex = (currentPage-1) * resultsPerPage;
+        let endIndex = Math.min(startIndex + resultsPerPage, searchRes.length);
+
+        for(let i=startIndex; i<endIndex; i++){
+          searchResults.innerHTML += "<li>"+searchRes[i]+"</li>"
+        }
+      }
+
+    </script>
+  </body>
+</html>

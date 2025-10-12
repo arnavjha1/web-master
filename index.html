@@ -1,305 +1,235 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <title>Web Master</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thrive Together - Community Resource Hub</title>
+    <script src="frontend.js" defer></script>
+
     <style>
-      h1 {
-        text-align: center;
-      }
+        * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background-color: #f8f9f7;
+    color: #333;
+    overflow-x: hidden;
+    text-align: center;
+  }
+
+  nav {
+    background-color: #dd2c08;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav .logo {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #1b3b2f;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  nav ul li a {
+    text-decoration: none;
+    color: blue;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover {
+    color: rgb(231, 8, 8)9f7;
+  }
+
+  .hero {
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/070/111/112/small/bright-open-office-space-with-natural-light-and-modern-design-photo.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 2rem;
+  }
+  .hero h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #d6f2cf;
+    margin-bottom: 0.8rem;
+  }
+  .hero p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #f1fff1;
+  }
+  .hero button {
+    background-color: #c2e1b5;
+    border: none;
+    color: #1b3b2f;
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .hero button:hover {
+    background-color: #a8c49c;
+    transform: translateY(-3px);
+  }
+
+  .scroll-down {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d9ead3;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  section {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    color: #2d5d40;
+  }
+
+  section p {
+    max-width: 750px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .spotlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .card-content {
+    padding: 1.2rem;
+  }
+  .card-content h3 {
+    color: #1b3b2f;
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+  }
+  .card-content p {
+    font-size: 0.95rem;
+    color: #666;
+  }
+
+  footer {
+    background: #1b3b2f;
+    color: #e8f5e9;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  footer a {
+    color: #c2e1b5;
+    text-decoration: none;
+  }
+  footer a:hover {
+    text-decoration: underline;
+  }
     </style>
-  </head>
+
+  </head>  
   <body>
-    <h1>Search Bar</h1>
-    <input id="search-bar" placeholder="Search">
-    <button id="submit" style="visibility:visible" onclick="slowAIsearch()">⌕</button><br><br>
 
-    <div id="loading" style="visibility:hidden">
-      <label for="file" id="search-label">Searching Database...</label><br>
-      <progress id="file" value="0" max="100"></progress><br>
-    </div>
+    <nav>
+    <div class="logo">Thrive Together</div>
+    <ul>
+        <li ><a href="#">About/Mission</a></li>
+        <li><a href='#'>Directory</a></li>
+        <li><a href='#'>Events</a></li>
+        <li ><a href="#">Resources</a></li>
+        <li><a href='#'>Request for Resources</a></li>
+        <li ><a href="#">Contact</a></li>
+        <input id="search" type="text" placeholder="Search..."><button onclick="search()">🔍</button>
+    </ul>
+    </nav>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Thrive Together</h1>
+        <p>Empowering Our Community With Every Resource, Every Event, And Every Connection</p>
+        <button id="getStartedBtn">Explore Resources</button>
+      </div>
+      <div class="scroll-down">Scroll Down ↓</div>
+    </section>
 
-    <div id="results" style="visibility:hidden">
-      <h3>Search Results</h3>
-      <ul id="search-results"></ul>
-      <p><button onclick="back()">&lt;</button>ㅤPage <c id="current-page">1</c> of <c id="total-pages">1</c>ㅤ<button onclick="forward()">&gt;</button></p>
-    </div>
-
-    <!--Scripts below-->
-    <script type="module">
-      //AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ
-      import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
-
-      // Replace this with your API key from Google AI Studio
-      const genAI = new GoogleGenerativeAI("AIzaSyAPmxTfZDIekGCyubKBwXHYCAdcMuLLMnQ");
-
-      window.slowAIsearch = async function() {
-        startLoadAnimation();
-
-        const prompt = "Take the following Javascript list and return a string of integers ordered from greatest to least relevancy to the search query. The search query is '" + document.getElementById("search-bar").value + "The database is " + database.toString() + ". Only return the string of integers with no other text. It should just be a line of "+database.length+" numbers without any line breaks, spaces, or characters. The integers should be between 0 and 9, where 0 is the most relevant and 9 is the least relevant.";
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response.text();
-
-        fullLoadAnimation(response);
-      }
-
-      let nuDatabase = [
-        
-      ]
-
-      let database = [
-        // Vegetables (Low-calorie, low-processed)
-        "spinach",
-        "kale",
-        "lettuce",
-        "broccoli",
-        "carrot",
-        "cucumber",
-        "tomato",
-        "zucchini",
-        "bell pepper",
-        "cauliflower",
-        "celery",
-        "onion",
-        "garlic",
-        "green beans",
-        "eggplant",
-
-        // Fruits (Low-processed, moderate calories)
-        "apple",
-        "banana",
-        "orange",
-        "grapes",
-        "blueberries",
-        "strawberries",
-        "pineapple",
-        "watermelon",
-        "peach",
-        "pear",
-        "mango",
-        "avocado",
-
-        // Whole grains (moderate processing, complex carbs)
-        "brown rice",
-        "quinoa",
-        "whole wheat bread",
-        "oatmeal",
-        "barley",
-        "bulgur",
-        "millet",
-
-        // Meat & protein (varying processing levels)
-        "chicken breast",
-        "ground beef",
-        "salmon",
-        "tuna",
-        "turkey",
-        "pork chop",
-        "bacon",
-        "hot dog",
-        "pepperoni",
-        "beef jerky",
-        "sausages",
-        "spam",
-        "ham",
-        "rotisserie chicken",
-
-        // Dairy & Eggs
-        "milk",
-        "yogurt",
-        "Greek yogurt",
-        "cheddar cheese",
-        "cottage cheese",
-        "cream cheese",
-        "butter",
-        "ice cream",
-        "eggs",
-        "whipped cream",
-
-        // Legumes & Nuts
-        "black beans",
-        "chickpeas",
-        "lentils",
-        "edamame",
-        "tofu",
-        "peanut butter",
-        "almonds",
-        "cashews",
-        "walnuts",
-
-        // Baked goods & snacks (moderate to high processing)
-        "white bread",
-        "croissant",
-        "bagel",
-        "donut",
-        "muffin",
-        "granola bar",
-        "potato chips",
-        "popcorn",
-        "pretzels",
-        "crackers",
-
-        // Sweets & Desserts (highly processed, high-calorie)
-        "chocolate bar",
-        "gummy bears",
-        "cheesecake",
-        "cupcake",
-        "cookies",
-        "brownies",
-        "ice cream sandwich",
-        "pudding cup",
-        "fruit snacks",
-
-        // Fast food & Frozen (ultra-processed)
-        "pizza",
-        "chicken nuggets",
-        "frozen lasagna",
-        "instant ramen",
-        "TV dinner",
-        "microwave popcorn",
-        "mac and cheese box",
-        "fish sticks",
-        "corn dog",
-
-        // Condiments & Sauces
-        "ketchup",
-        "mayonnaise",
-        "ranch dressing",
-        "soy sauce",
-        "barbecue sauce",
-        "sriracha"
-      ];
-
-      let optimizedSearch = false;
-      let searchRes = [];
-      const mostResults = 30;
-      const mostRelevance = 5;
-      const resultsPerPage = 10;
-      let currentPage = 1;
-      let totalPages = 1;
-
-      function startLoadAnimation(){
-        document.getElementById("loading").style.visibility = "visible";
-        document.getElementById("submit").style.visibility = "hidden";
-
-        let progressBar = document.getElementById("file");
-        let width = 0;
-        let id = setInterval(frame, database.length*8+250);
-        function frame() {
-          if(!optimizedSearch){
-            if (width >= 100) {
-              clearInterval(id);
-            } else {
-              if(width > 75){
-                document.getElementById("search-label").innerText = "Deep Analysis (this may take a while) ...";
-                width += 0.2;
-              }
-              else if(width > 50){
-                document.getElementById("search-label").innerText = "Analyzing database ...";
-                width += 0.5;
-              }
-              else if(width > 25){
-                document.getElementById("search-label").innerText = "Comparing results ...";
-                width += 1;
-              }
-              else {
-                width += 3;
-              }
-              progressBar.value = width;
-            }
-          }
-          else {
-            clearInterval(id);
-          }
-        }
-      }
-
-      function fullLoadAnimation(response){
-        optimizedSearch = true;                            //Searching database...
-        document.getElementById("search-label").innerText = "Optimizing Algorithm ...";
-        
-        let progressBar = document.getElementById("file");
-        let width = parseInt(progressBar.value);
-        let id = setInterval(frame, 250);
-        function frame() {
-          if (width >= 100) {
-            clearInterval(id);
-            document.getElementById("loading").style.visibility = "hidden";
-            document.getElementById("results").style.visibility = "visible";
-            alert(response);
-            processSearchResults(response);
-          } else {
-            width += Math.random()*4+3;
-            progressBar.value = width;
-          }
-        }
-      }
-
-      function fastNonAISearch(){
-        let searchQuery = document.getElementById("search-bar").value;
-        let searchResults = document.getElementById("search-results");
-
-        //Look though all of the database to see what search results match
-        for(let i=0; i<database.length; i++){
-          if(database[i].split(searchQuery)[0] != database[i]){
-            searchResults.innerHTML += "<li>"+database[i]+"</li>"
-          }
-        }
-      }
-
-      function processSearchResults(response){
-        document.getElementById("loading").style.visibility = "hidden";
-        document.getElementById("results").style.visibility = "visible";
-
-        let searchResults = document.getElementById("search-results");
-        searchResults.innerHTML = "";
-
-        let indices = response.split("");
-        for(let j=0; j<mostRelevance; j++){
-          for(let i=0; i<indices.length; i++){
-            let index = parseInt(indices[i]);
-            if(index == j){
-              searchRes.push(database[i]);
-            }
-          }
-          if(searchRes.length >= mostResults){
-            break;
-          }
-        }
-
-        updateResults();
-      }
-
-      window.back = function() {
-        if(currentPage > 1){
-          currentPage--;
-          updateResults();
-        }
-      }
-      
-      window.forward = function() {
-        if(currentPage < totalPages){
-          currentPage++;
-          updateResults();
-        }
-      }
-
-      function updateResults(){
-        let searchResults = document.getElementById("search-results");
-        searchResults.innerHTML = "";
-
-        totalPages = Math.ceil(searchRes.length / resultsPerPage);
-        document.getElementById("current-page").innerText = currentPage;
-        document.getElementById("total-pages").innerText = totalPages;
-
-        let startIndex = (currentPage-1) * resultsPerPage;
-        let endIndex = Math.min(startIndex + resultsPerPage, searchRes.length);
-
-        for(let i=startIndex; i<endIndex; i++){
-          searchResults.innerHTML += "<li>"+searchRes[i]+"</li>"
-        }
-      }
-
-    </script>
+    <section>
+      <h2>Featured Community Program</h2>
+      <p>Figure Out The Best Resource for You, Topics Including Housing, Mental Health, etc</p>
+      <div class="spotlight-grid">
+        <div class="card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfHb67KiM5cX9qUMBi5XGY-rCZfimLoq5KCQ&s" alt="Redmond Food Drive">
+          <div class="card-content">
+            <h3>Redmond Food Drive</h3>
+            <p>Join us in supporting our community by donating non-perishable food items. Every contribution helps families in need.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://www.mentalhealth.org.uk/sites/default/files/styles/large/public/2021-06/mental-health-awareness-week-2021.jpg?h=bbf6d4c7&itok=Zk2tHkC5" alt="Mental Health Workshop">
+          <div class="card-content">
+            <h3>Mental Health Workshop</h3>
+            <p>Learn coping strategies and connect with others in our supportive mental health workshop. Open to all community members.</p>
+          </div>
+      </div>
+    </section>
+    <footer>
+  <p>© 2025 Thrive Together. Built for our community members. <a href="#">Contact Us</a></p>
+</footer>
   </body>
+  <script>
+    function search() {
+      window.location.href = "search.html#"+document.getElementById("search").value;
+    }
+  </script>
 </html>
