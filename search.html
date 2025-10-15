@@ -228,6 +228,7 @@
         
         let progressBar = document.getElementById("file");
         let width = parseInt(progressBar.value);
+        let ogChange = 0.2;
         let id = setInterval(frame, 250);
         function frame() {
           if (width >= 100) {
@@ -237,7 +238,8 @@
             alert(response);
             processSearchResults(response);
           } else {
-            width += Math.random()*4+3;
+            width += ogChange;
+            ogChange += 0.2;
             progressBar.value = width;
           }
         }
