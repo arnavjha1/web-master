@@ -24,7 +24,8 @@ const db = new sqlite3.Database(dbPath, (err) => {
         description TEXT,
         website TEXT,
         location TEXT,
-        phone TEXT
+        phone TEXT,
+        image TEXT
       );
     `;
     db.run(createSql, (err) => {
@@ -49,11 +50,11 @@ app.get("/api/resources", (req, res) => {
 
 // API endpoint to add a new resource
 app.post("/api/resources", (req, res) => {
-    const { name, category, description, website, location, phone } = req.body;
+    const { name, category, description, website, location, phone, image } = req.body;
     const sql = `INSERT INTO resources 
-                 (name, category, description, website, location, phone) 
-                 VALUES (?, ?, ?, ?, ?, ?)`;
-    db.run(sql, [name, category, description, website, location, phone], function (err) {
+                 (name, category, description, website, location, phone, image) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    db.run(sql, [name, category, description, website, location, phone, image], function (err) {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
