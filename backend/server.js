@@ -9,12 +9,32 @@ app.use(express.json());
 
 // Connect to SQLite database
 const dbPath = path.join(__dirname, "../database/my_database.db");
+
 const db = new sqlite3.Database(dbPath, (err) => {
-    if (err) {
-        console.error("Database connection failed:", err.message);
-    } else {
-        console.log("Connected to SQLite database!");
-    }
+  if (err) {
+    console.error("Database connection failed:", err.message);
+  } else {
+    console.log("Connected to SQLite database!");
+    // Ensure table exists
+    const createSql = `
+      CREATE TABLE IF NOT EXISTS resources (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        category TEXT,
+        description TEXT,
+        website TEXT,
+        location TEXT,
+        phone TEXT
+      );
+    `;
+    db.run(createSql, (err) => {
+      if (err) {
+        console.error("Failed to create resources table:", err.message);
+      } else {
+        console.log("resources table is present (created if missing).");
+      }
+    });
+  }
 });
 
 // API endpoint to get all resources
