@@ -7,14 +7,14 @@ if (document.getElementById("highlight-container")) {
     .then(data => {
       const container = document.getElementById("highlight-container");
       data.slice(0, 3).forEach(res => {
-  container.innerHTML += `
-    <div class="card">
-      ${res.image ? `<img src="${res.image}" alt="${res.name}">` : ""}
-      <h3>${res.name}</h3>
-      <p>${res.description}</p>
-      <a href="${res.website}" target="_blank">Visit Website</a>
-    </div>`;
-});
+      container.innerHTML += `
+        <div class="card">
+          ${res.image ? `<img src="${res.image}" alt="${res.name}">` : ""}
+          <h3>${res.name}</h3>
+          <p>${res.description}</p>
+          <a href="${res.website}" target="_blank">Visit Website</a>
+        </div>`;
+      });
     });
 }
 
@@ -34,11 +34,12 @@ if (document.getElementById("directory-container")) {
       );
       const container = document.getElementById("directory-container");
       container.innerHTML = filtered.map(res => `
-  <div class="card">
-    ${res.image ? `<img src="${res.image}" alt="${res.name}">` : ""}
-    <h3>${res.name}</h3>
-    <p>${res.description}</p>
-  </div>`).join("");
+        <div class="card">
+          ${res.image ? `<img src="${res.image}" alt="${res.name}">` : ""}
+          <h3>${res.name}</h3>
+          <p>${res.description}</p>
+        </div>
+      `).join("");
     });
   }
 
