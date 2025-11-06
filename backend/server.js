@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to SQLite database
-const dbPath = path.join(__dirname, "../database/my_database.db");
+const dbPath = path.join(__dirname, "database/my_database.db");
 
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
