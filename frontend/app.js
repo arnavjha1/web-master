@@ -35,11 +35,12 @@ if (document.getElementById("directory-container")) {
       );
       const container = document.getElementById("directory-container");
       container.innerHTML = filtered.map(res => `
-        <div class="card">
+        <div class="card" onclick="window.location='${res.website}'">
           ${res.image ? `<img src="${res.image}" alt="${res.name}">` : ""}
           <div class="card-content">
             <h3>${res.name}</h3>
-            <p>${res.description}</p>
+            <p>${res.description}</p><br>
+            <a class="a" href="${res.website}" target="_blank">Visit Website</a>
           </div>
         </div>
       `).join("");
