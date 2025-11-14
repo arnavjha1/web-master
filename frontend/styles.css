@@ -158,8 +158,9 @@
 
   .spotlight-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+    justify-content: start; /* ← forces the grid to left-align */row-gap: 2.5rem;
+    column-gap: 2rem;
     padding-top: 1rem;
   }
   .card {
@@ -169,7 +170,8 @@
     overflow: hidden;
     transition: transform 0.3s ease box-shadow 0.3s ease;
     text-align: left;
-    width: 400px;
+    width: 100%;   /* recommended */
+    max-width: 360px; /* optional limit */
   }
   .card:hover {
     transform: translateY(-5px);
@@ -243,3 +245,47 @@
                 width: 100%;
             }
         }
+
+.styled-input {
+  background-color: #FF6B6B33; /* soft pink with transparency */
+  padding: 0.6rem 1rem;       /* pink “padding” look */
+  border: 2px solid white;    /* white border */
+  color: white;               /* white text */
+  border-radius: 6px;         /* smooth rounded edges */
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+  max-width: 300px;           /* adjust if needed */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.styled-input::placeholder {
+  color: #f7f7f7cc; /* light white placeholder */
+}
+
+.styled-input:focus {
+  border-color: #FF6B6B;     /* bright pink highlight */
+  box-shadow: 0 0 8px #ff6b6b88;
+}
+
+.styled-input-red {
+  background-color: #DD4649; /* soft pink with transparency */
+  padding: 0.6rem 1rem;       /* pink “padding” look */
+  border: 2px solid white;    /* white border */
+  color: white;               /* white text */
+  border-radius: 6px;         /* smooth rounded edges */
+  font-size: 1rem;
+  outline: none;
+  width: 100%;
+  max-width: 300px;           /* adjust if needed */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.styled-input-red::placeholder {
+  color: #f7f7f7cc; /* light white placeholder */
+}
+
+.styled-input-red:focus {
+  border-color: #FF6B6B;     /* bright pink highlight */
+  box-shadow: 0 0 8px #ff6b6b88;
+}

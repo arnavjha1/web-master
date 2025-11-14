@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thrive Together - Community Resource Hub</title>
-    <script src="frontend.js" defer></script>
     <link rel="stylesheet" href="styles.css">
   </head>  
   <body>
@@ -15,23 +14,25 @@
         <li ><a href="index.html">Home</a></li>
         <li><a href='directory.html'>Directory</a></li>
         <li><a href='submit.html'>Submit Resource</a></li>
-        <input id="search" type="text" placeholder="Search..."><button onclick="search()">🔍</button>
     </ul>
     </nav>
 <!--Keep below this-->
 <div class="margin-container">
-<input type="text" id="searchBox" placeholder="Search by name or keyword…">
-<select id="categoryFilter">
+<input class="styled-input" type="text" id="searchBox" placeholder="Search by name or keyword…">
+<select class="styled-input-red" id="categoryFilter">
   <option value="">All Categories</option>
   <option>Health</option>
   <option>Education</option>
   <option>Food</option>
   <option>Emergency</option>
-</select><br><br>
+</select>
+<div class="margin-container">
+          <section id="highlights">
+              <div class="spotlight-grid" id="highlight-container"></div>
+          </section>
+        </div>
 
-<div class="spotlight-container"id="directory-container"></div></div>
-
-<script src="app.js"></script>
+        <script src="app.js"></script>
 <!--Add stuff below, keep whats above and dont edit-->
     <footer>
   <p>© 2025 Thrive Together. Built for our community members. <a href="#">Contact Us</a></p>
