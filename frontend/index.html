@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Thrive Together - Community Resource Hub</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thrive Together - Community Resource Hub</title>
+    <script src="frontend.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>  
+  <body>
+
     <nav>
     <div class="logo">Thrive Together</div>
     <ul>
-        <li ><a href="#">About/Mission</a></li>
-        <li><a href='#'>Directory</a></li>
-        <li><a href='#'>Events</a></li>
-        <li ><a href="#">Resources</a></li>
-        <li><a href='#'>Request for Resources</a></li>
-        <li ><a href="#">Contact</a></li>
+        <li ><a href="index.html">Home</a></li>
+        <li><a href='directory.html'>Directory</a></li>
+        <li><a href='search.html'>Search</a></li>
         <input id="search" type="text" placeholder="Search..."><button onclick="search()">🔍</button>
     </ul>
     </nav>
@@ -28,37 +27,21 @@
       <div class="scroll-down">Scroll Down ↓</div>
     </section>
 
-    <!--<section>
-      <h2>Featured Community Program</h2>
-      <p>Figure Out The Best Resource for You, Topics Including Housing, Mental Health, etc</p>
-      <div class="spotlight-grid">
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfHb67KiM5cX9qUMBi5XGY-rCZfimLoq5KCQ&s" alt="Redmond Food Drive">
-          <div class="card-content">
-            <h3>Redmond Food Drive</h3>
-            <p>Join us in supporting our community by donating non-perishable food items. Every contribution helps families in need.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://www.brainline.org/sites/all/modules/custom/bl_brain/images/brain-lateral.png" alt="Mental Health Workshop">
-          <div class="card-content">
-            <h3>Mental Health Workshop</h3>
-            <p>Learn coping strategies and connect with others in our supportive mental health workshop. Open to all community members.</p>
-          </div>
-      </div>
-    </section>
-    <footer>
-  <p>© 2025 Thrive Together. Built for our community members. <a href="#">Contact Us</a></p>
-</footer>-->
-
         <!--Keep everything below this-->
         <section id="highlights">
             <h2>Featured Resources</h2>
-            <div id="highlight-container"></div>
+            <div class="spotlight-grid" id="highlight-container"></div>
         </section>
 
         <script src="app.js"></script>
         <!--Add stuff below, keep stuff above-->
-
-    </body>
+    <footer>
+  <p>© 2025 Thrive Together. Built for our community members. <a href="#">Contact Us</a></p>
+</footer>
+  </body>
+  <script>
+    function search() {
+      window.location.href = "search.html#"+document.getElementById("search").value;
+    }
+  </script>
 </html>

@@ -1,4 +1,5 @@
- * {
+
+  * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -168,6 +169,7 @@
     overflow: hidden;
     transition: transform 0.3s ease box-shadow 0.3s ease;
     text-align: left;
+    width: 400px;
   }
   .card:hover {
     transform: translateY(-5px);
@@ -192,7 +194,9 @@
     color: #666;
     margin: 0;
   }
-
+  .margin-container {
+    margin: 4rem 2rem;
+  }
   footer {
     background: #1b3b2f;
     color: #D6F2CF;
@@ -239,15 +243,3 @@
                 width: 100%;
             }
         }
-
-#highlights {
-    padding: 60px 20px;
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-}
-
-.card-content #highlights{
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}

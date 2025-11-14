@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thrive Together - Community Resource Hub</title>
+    <script src="frontend.js" defer></script>
   <title>Submit a Resource</title>
   <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header>
-  <h1>Submit a New Resource</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="directory.html">Directory</a>
-    <a href="submit.html">Submit Resource</a>
-  </nav>
-</header>
 
+  </head>  
+  <body>
+
+    <nav>
+    <div class="logo">Thrive Together</div>
+    <ul>
+        <li ><a href="index.html">Home</a></li>
+        <li><a href='directory.html'>Directory</a></li>
+        <li><a href='submit.html'>Submit Resource</a></li>
+        <input id="search" type="text" placeholder="Search..."><button onclick="search()">🔍</button>
+    </ul>
+    </nav>
+    
 <!--Keep stuff below this-->
+<div class="margin-container">
 <form id="resourceForm">
   <input name="name" placeholder="Resource Name" required>
   <input name="category" placeholder="Category" required>
@@ -25,10 +33,17 @@
   <textarea name="description" placeholder="Description"></textarea>
   <button type="submit">Submit</button>
 </form>
+</div>
 
 <script src="app.js"></script>
 <!--Add stuff below, keep stuff above-->
-
-
-</body>
+    <footer>
+  <p>© 2025 Thrive Together. Built for our community members. <a href="#">Contact Us</a></p>
+</footer>
+  </body>
+  <script>
+    function search() {
+      window.location.href = "search.html#"+document.getElementById("search").value;
+    }
+  </script>
 </html>

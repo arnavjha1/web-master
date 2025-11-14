@@ -10,9 +10,10 @@ if (document.getElementById("highlight-container")) {
       container.innerHTML += `
         <div class="card">
           ${res.image ? `<img src="${res.image}" alt="${res.name}">` : ""}
-          <h3>${res.name}</h3>
-          <p>${res.description}</p>
-          <a href="${res.website}" target="_blank">Visit Website</a>
+          <div class="card-content">
+            <h3>${res.name}</h3>
+            <p>${res.description}</p>
+          </div>
         </div>`;
       });
     });
@@ -36,8 +37,10 @@ if (document.getElementById("directory-container")) {
       container.innerHTML = filtered.map(res => `
         <div class="card">
           ${res.image ? `<img src="${res.image}" alt="${res.name}">` : ""}
-          <h3>${res.name}</h3>
-          <p>${res.description}</p>
+          <div class="card-content">
+            <h3>${res.name}</h3>
+            <p>${res.description}</p>
+          </div>
         </div>
       `).join("");
     });

@@ -5,250 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thrive Together - Community Resource Hub</title>
     <script src="frontend.js" defer></script>
-
-    <style>
-        * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    font-family: "Inter", "Segoe UI", sans-serif;
-    background-color: green;
-    color: #1B3B2F;
-    overflow-x: hidden;
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  nav {
-    background-color: #FF6B6B;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  nav .logo {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: -0.5px;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    flex-grow: 1;
-    justify-content: flex-end;
-  }
-  nav ul li a {
-    text-decoration: none;
-    color: #F5F7F3;
-    font-weight: 500;
-    transition: color 0.3s ease;
-    padding: 0.25rem 0;
-  }
-  nav ul li a:hover {
-    color: #1B3B2F;
-  }
-
-  #search {
-    padding: 0.4rem;
-    border: none;
-    border-radius: 4px 0 0 4px; 
-    font-size: 0.9rem;
-    width: 120px;
-        }
-  nav button {
-    background-color: #1B3B2F;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.6rem;
-    border-radius: 0 4px 4px 0;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  nav button:hover {
-    background-color: #2D5D40;
-  }
-
-  .hero {
-    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/070/111/112/small/bright-open-office-space-with-natural-light-and-modern-design-photo.jpg');
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-  }
-  .hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.55);
-  }
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    padding: 2rem;
-  }
-  .hero h1 {
-    font-size: 4rem;
-    font-weight: 900;
-    color: #d6f2cf;
-    margin-bottom: 0.8rem;
-    letter-spacing: 1px;
-  }
-  .hero p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    line-height: 1.5;
-    color: #D6F2CF;
-  }
-  .hero button {
-    background-color: forestgreen;
-    border: 2px solid mintcream;
-    color: white;
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .hero button:hover {
-    background-color: #2D5D40;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  }
-
-  .scroll-down {
-    position: absolute;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #D6F2CF;
-    font-size: 0.9rem;
-    opacity: 0.8;
-  }
-
-  section {
-    padding: 6rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #FF6B6B;
-    font-weight: 700;
-  }
-
-  section p {
-    max-width: 800px;
-    margin: 0 auto 3rem;
-    line-height: 1.7;
-    color: #555;
-    font-size: 1.7rem;
-  }
-
-  .spotlight-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding-top: 1rem;
-  }
-  .card {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-    overflow: hidden;
-    transition: transform 0.3s ease box-shadow 0.3s ease;
-    text-align: left;
-  }
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-  }
-  .card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-  }
-  .card-content {
-    padding: 1.5rem;
-  }
-  .card-content h3 {
-    color: #1B3B2F;
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-  .card-content p {
-    font-size: 1rem;
-    color: #666;
-    margin: 0;
-  }
-
-  footer {
-    background: #1b3b2f;
-    color: #D6F2CF;
-    text-align: center;
-    padding: 2.5rem 1rem;
-    font-size: 0.95rem;
-  }
-  footer a {
-    color: #FF6B6B;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  footer a:hover {
-    text-decoration: underline;
-  }
-  @media (max-width: 900px) {
-            nav {
-                flex-direction: column;
-                padding: 1rem 1.5rem;
-            }
-            nav .logo {
-                margin-bottom: 1rem;
-            }
-            nav ul {
-                flex-direction: column;
-                gap: 0.8rem;
-                align-items: stretch;
-                width: 100%;
-            }
-            nav ul li a {
-                padding: 0.5rem;
-                display: block;
-                text-align: center;
-                background-color: rgba(255, 255, 255, 0.1);
-                border-radius: 4px;
-            }
-            nav ul li:last-child {
-                display: flex;
-                justify-content: center;
-                margin-top: 0.5rem;
-                width: 100%;
-            }
-            #search {
-                width: 100%;
-            }
-        }
-    </style>
+  <title>Submit a Resource</title>
+  <link rel="stylesheet" href="styles.css">
 
   </head>  
   <body>
@@ -256,43 +14,27 @@
     <nav>
     <div class="logo">Thrive Together</div>
     <ul>
-        <li ><a href="#">About/Mission</a></li>
-        <li><a href='#'>Directory</a></li>
-        <li><a href='#'>Events</a></li>
-        <li ><a href="#">Resources</a></li>
-        <li><a href='#'>Request for Resources</a></li>
-        <li ><a href="#">Contact</a></li>
+        <li ><a href="index.html">Home</a></li>
+        <li><a href='directory.html'>Directory</a></li>
+        <li><a href='submit.html'>Search</a></li>
         <input id="search" type="text" placeholder="Search..."><button onclick="search()">🔍</button>
     </ul>
     </nav>
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Thrive Together</h1>
-        <p>Empowering Our Community With Every Resource, Every Event, And Every Connection</p>
-        <button id="getStartedBtn">Explore Resources</button>
-      </div>
-      <div class="scroll-down">Scroll Down ↓</div>
-    </section>
+    
+<!--Keep stuff below this-->
+<form id="resourceForm">
+  <input name="name" placeholder="Resource Name" required>
+  <input name="category" placeholder="Category" required>
+  <input name="website" placeholder="Website URL">
+  <input name="location" placeholder="Location">
+  <input name="phone" placeholder="Phone Number">
+  <input name="image" placeholder="Image URL (optional)">
+  <textarea name="description" placeholder="Description"></textarea>
+  <button type="submit">Submit</button>
+</form>
 
-    <section>
-      <h2>Featured Community Program</h2>
-      <p>Figure Out The Best Resource for You, Topics Including Housing, Mental Health, etc</p>
-      <div class="spotlight-grid">
-        <div class="card">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfHb67KiM5cX9qUMBi5XGY-rCZfimLoq5KCQ&s" alt="Redmond Food Drive">
-          <div class="card-content">
-            <h3>Redmond Food Drive</h3>
-            <p>Join us in supporting our community by donating non-perishable food items. Every contribution helps families in need.</p>
-          </div>
-        </div>
-        <div class="card">
-          <img src="https://www.brainline.org/sites/all/modules/custom/bl_brain/images/brain-lateral.png" alt="Mental Health Workshop">
-          <div class="card-content">
-            <h3>Mental Health Workshop</h3>
-            <p>Learn coping strategies and connect with others in our supportive mental health workshop. Open to all community members.</p>
-          </div>
-      </div>
-    </section>
+<script src="app.js"></script>
+<!--Add stuff below, keep stuff above-->
     <footer>
   <p>© 2025 Thrive Together. Built for our community members. <a href="#">Contact Us</a></p>
 </footer>
