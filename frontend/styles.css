@@ -6,7 +6,7 @@
   }
   body {
     font-family: "Inter", "Segoe UI", sans-serif;
-    background-color: green;
+    background-color: #d6f2cf;
     color: #1B3B2F;
     overflow-x: hidden;
     text-align: center;
@@ -14,7 +14,7 @@
   }
 
   nav {
-    background-color: #FF6B6B;
+    background-color: green;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -144,8 +144,13 @@
   h2 {
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
-    color: #FF6B6B;
+    color: white;
     font-weight: 700;
+    border-radius: 10px;
+    border: 2px solid white;
+    background-color: green;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   section p {
@@ -177,10 +182,10 @@
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.15);
   }
-  .a {
+  .card a {
     border-radius: 4px;
     color: white;
-    background-color: #FF6B6B;
+    background-color: green;
     padding: 0.5rem 1rem;
     border-color: white;
     text-align: center;
@@ -215,7 +220,7 @@
     font-size: 0.95rem;
   }
   footer a {
-    color: #FF6B6B;
+    color: green;
     text-decoration: none;
     font-weight: 500;
   }
@@ -272,12 +277,12 @@
 }
 
 .styled-input:focus {
-  border-color: #FF6B6B;     /* bright pink highlight */
+  border-color: green;     /* bright pink highlight */
   box-shadow: 0 0 8px #ff6b6b88;
 }
 
 .styled-input-red {
-  background-color: #DD4649; /* soft pink with transparency */
+  background-color: green; /* soft pink with transparency */
   padding: 0.6rem 1rem;       /* pink “padding” look */
   border: 2px solid white;    /* white border */
   color: white;               /* white text */
