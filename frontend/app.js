@@ -68,7 +68,7 @@ if (document.getElementById("submit-container")) {
           <img src="`+image.value+`" alt="Put a valid image URL to see preview">
           <div class="card-content">
             <h3>`+name.value+`</h3>
-            <p>`+desc.innerHTML+`</p><br>
+            <p>`+desc.value+`</p><br>
             <a class="a" href="`+linker.value+`" target="_blank">Visit Website</a>
           </div>
         </div>

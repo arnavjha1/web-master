@@ -6,7 +6,7 @@
   }
   body {
     font-family: "Inter", "Segoe UI", sans-serif;
-    background-color: green;
+    background-color: #d6f2cf;
     color: #1B3B2F;
     overflow-x: hidden;
     text-align: center;
@@ -146,6 +146,11 @@
     margin-bottom: 1.5rem;
     color: white;
     font-weight: 700;
+    border-radius: 10px;
+    border: 2px solid white;
+    background-color: green;
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   section p {
