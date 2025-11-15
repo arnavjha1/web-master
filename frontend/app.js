@@ -53,6 +53,46 @@ if (document.getElementById("directory-container")) {
   loadDirectory();
 }
 
+// Preview on Submit Page
+if (document.getElementById("submit-container")) {
+  const container = document.getElementById("submit-container");
+  const name = document.getElementById("name");
+  const desc = document.getElementById("description");
+  const linker = document.getElementById("website");
+  const image = document.getElementById("image");
+  function loadDirectory() {
+    const ifLink = linker.value.startsWith("http://") || linker.value.startsWith("https://");
+    if(ifLink){  
+      container.innerHTML = `
+        <div class="card">
+          <img src="`+image.value+`" alt="Put a valid image URL to see preview">
+          <div class="card-content">
+            <h3>`+name.value+`</h3>
+            <p>`+desc.innerHTML+`</p><br>
+            <a class="a" href="`+linker.value+`" target="_blank">Visit Website</a>
+          </div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <div class="card">
+          <img src="`+image.value+`" alt="Put a valid image URL to see preview">
+          <div class="card-content">
+            <h3>`+name.value+`</h3>
+            <p>`+desc.value+`</p><br>
+            <a class="a">Visit Website</a>
+          </div>
+        </div>
+      `;
+    }
+  }
+  name.addEventListener("input", loadDirectory);
+  desc.addEventListener("input", loadDirectory);
+  linker.addEventListener("input", loadDirectory);
+  image.addEventListener("input", loadDirectory);
+  loadDirectory();
+}
+
 // Submit Page
 if (document.getElementById("resourceForm")) {
   document.getElementById("resourceForm").addEventListener("submit", async (e) => {
